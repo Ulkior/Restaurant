@@ -1,0 +1,50 @@
+<section id="book-a-table" class="book-a-table">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>Резервирование</h2>
+            <p>Бронь столика</p>
+        </div>
+
+        <form action="{% url 'book_table' %}" method="post" role="form" class="php-email-form" data-aos="fade-up"
+              data-aos-delay="100" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
+                    {{ form.name }}
+                    <div class="validate"></div>
+                </div>
+                <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
+                    {{ form.email }}
+                    <div class="validate"></div>
+                </div>
+                <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
+                    {{ form.phone }}
+                </div>
+                <div class="col-lg-4 col-md-6 form-group mt-3">
+                    {{ form.data }}
+                </div>
+                <div class="col-lg-4 col-md-6 form-group mt-3">
+                    {{ form.time }}
+                </div>
+                <div class="col-lg-4 col-md-6 form-group mt-3">
+                    {{ form.people_quantity }}
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                {{ form.message }}
+            </div>
+            <div class="mb-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your booking request was sent. We will call back or send an Email to
+                    confirm your reservation. Thank you!
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit">Book a Table</button>
+            </div>
+        </form>
+
+    </div>
+</section>

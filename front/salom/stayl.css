@@ -1,0 +1,75 @@
+/* mening qoshimchalarim uzb */
+
+
+.wraperCarts{
+    max-width: 1320px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .Cards{
+    padding: 10px;
+    justify-content: center;
+    width: 32%;
+    cursor: pointer;   
+    background-color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .Cards__img{
+    width: 100%;
+    height: auto;
+  }
+  
+  .cards-name{
+    color:#cda45e;
+  }
+  
+  .card__text{
+    color: #fff;
+    font-size: 15px;
+  }
+  
+  .cards__wrapper{
+    display: flex;
+    justify-content: space-between;
+  
+  }
+  
+  .buy{
+    width: 100px;
+    height: 30px;
+    border-radius: 8px;
+    border: 0;
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .buy:hover{
+    background-color: #cda45e;
+    transition: 0.4s;
+    color: #fff;
+  }
+  
+  @media(max-width:992px){
+    .wraperCarts{
+      justify-content: center;
+    }
+    .Cards{
+      width: 45%;
+    }
+  }
+  
+  @media(max-width:768px){
+    .wraperCarts{
+      justify-content: center;
+    }
+    .Cards{
+      width: 80%;
+    }
+  }

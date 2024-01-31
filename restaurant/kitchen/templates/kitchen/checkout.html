@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock title %}
+
+{% block poster %}
+{% endblock poster %}
+
+
+{% block main %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="box-element">
+                <a class="btn btn-primary" href="{% url 'cart' %}">Вернутся в корзину</a>
+                <hr>
+                <h3 style="flex:2; color: black;">Продукты в заказе</h3>
+                <hr>
+                <div class="cart-row">
+                    <div style="flex:2; color: black;"><strong>Изображение</strong></div>
+                    <div style="flex:2; color: black;"><strong>Продукт</strong></div>
+                    <div style="flex:1; color: black;"><strong>Цена</strong></div>
+                    <div style="flex:2; color: black;"><strong>Кол-во</strong></div>
+                    <div style="flex:1; color: black;"><strong>Общ цена</strong></div>
+                </div>
+
+                {% for item in products %}
+                {% include 'kitchen/components/_cart_row.html' %}
+                {% endfor %}
+
+                <h5 style="flex:1; color: black;">Общая цена: {{ cart_total_price }}</h5>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="box-element">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div id="user-info">
+                        <hr>
+                        <h5 style="flex:2; color: black;">Ваши данные</h5>
+                        <hr>
+                        <div class="form-control">
+                            {{ customer_form.first_name }}
+                        </div>
+                        <div class="form-control">
+                            {{ customer_form.last_name }}
+                        </div>
+
+                    </div>
+                    <div id="shipping-info">
+                        <hr>
+                        <h5 style="flex:2; color: black;">Адрес доставки</h5>
+                        <hr>
+                        {% for field in shipping_form %}
+                        <div class="form-control">
+                            {{ field }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button class="btn btn-success" type="submit">Оформить заказ</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+.container{
+        position: inherit !important;
+        padding: 150px 0px 40px 0px !important;
+
+</style>
+{% endblock main %}
+<style>
+    main{
+        padding-top: 10rem;
+        height: 90vh
+    }
+    .booked_card{
+        position: inherit;
+    }
+    .booked_card h5{
+        color: white;
+    }
+    .booked_card .cart_row{
+        color: black;
+    }
+
+</style>
+

@@ -1,0 +1,60 @@
+{% load kitchen_tags %}
+{% load static %}
+<header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+
+        <h1 class="logo me-auto me-lg-0"><a href="{% url 'index' %}">Ресторан</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!--<a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+                <li><a class="nav-link scrollto active" href="{% url 'index' %}">Все</a></li>
+                <li><a class="nav-link scrollto" href="#about">О нас</a></li>
+                <li><a class="nav-link scrollto" href="#events">События</a></li>
+                <li><a class="nav-link scrollto" href="#gallery">Галерея</a></li>
+                <li><a class="nav-link scrollto" href="#chefs">Шефы</a></li>
+                <li class="dropdown"><a href="{% url 'menu' %}"><span>Меню</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        {% get_categories as categories %}
+                        {% for category in categories %}
+                        <li class="dropdown"><a href="{% url 'meals_page' category.slug %}"><span>{{ category.title }}</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                                {% for subcategory in category.subcategories.all %}
+                                <li><a href="{% url 'sub_meals_page' subcategory.slug %}">{{ subcategory.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+            <div class="header_panel-item">
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'logout_user' %}">
+                    <img class="circum" src="{% static 'kitchen/assets/img/circum_logout.png' %}">
+                </a>
+                <a href="{% url 'profile_page' request.user.id %}">
+                    <img class="header-icon" src="{% static 'kitchen/assets/img/profile.png' %}">
+                </a>
+                <a href="{% url 'cart' %}">
+                    <img class="basket" src="{% static 'kitchen/assets/img/basket.png' %}">
+                </a>
+                {% else %}
+                <a href="{% url 'registration' %}">
+                    <img class="circum" src="{% static 'kitchen/assets/img/circum_login.png' %}">
+                </a>
+                <a href="{% url 'login_user' %}">
+                    <img class="basket" src="{% static 'kitchen/assets/img/basket.png' %}">
+                </a>
+                {% endif %}
+
+            </div>
+        </nav>
+        <!-- .navbar -->
+        <a href="#book-a-table" class="book-a-table-btn scrollto d-none d-lg-flex">Забронировать столик</a>
+
+    </div>
+</header>

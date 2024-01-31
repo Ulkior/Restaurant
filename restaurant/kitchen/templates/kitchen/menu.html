@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load kitchen_tags %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+
+{% block navbar %}
+<header id="header" class="fixed-top d-flex align-items-cente">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+
+        <h1 class="logo me-auto me-lg-0"><a href="{% url 'index' %}">Ресторан</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+                <li class="dropdown"><a href="#"><span>Кухни</span> <i
+                        class="bi bi-chevron-right"></i></a>
+                    <ul>
+                        {% for kitchen in kitchens %}
+                        <li><a href="#">{{ kitchen.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% get_categories as categories %}
+                {% for category in categories %}
+                <li class="dropdown"><a href="{% url 'meals_page' category.slug %}"><span>{{ category.title }}</span> <i
+                        class="bi bi-chevron-right"></i></a>
+                    <ul>
+                        {% for subcategory in category.subcategories.all %}
+                        <li><a href="{% url 'meals_page' subcategory.slug %}">{{ subcategory.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <!-- .navbar -->
+        <a href="#book-a-table" class="book-a-table-btn scrollto d-none d-lg-flex">Забронировать столик</a>
+
+    </div>
+</header>
+{% endblock navbar %}
+
+
+{% block poster %}
+
+<section class="hero-wrap hero-wrap-2" style="background-image: url({% static 'kitchen/assets/img/hero-bg.jpg' %});"
+         data-stellar-background-ratio="0.5">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100"></div>
+</section>
+{% endblock poster %}
+
+
+{% block main %}
+<div class="row menu_cards" data-aos="fade-up" data-aos-delay="200">
+    <div class="wraperCarts">
+        {% for meal in meals %}
+        <div class="Cards">
+            <img class="Cards__img" src="{{ meal.get_first_photo }}" alt="" srcset=""/>
+            <h1 class="cards-name">{{ meal.title }}</h1>
+            <p class="card__text">{{ meal.description }}</p>
+            <div class="cards__wrapper">
+                <div class="prays">{{ meal.price }}сум</div>
+                <a href="{% url 'to_cart' meal.pk 'add' %}" class="menu-btn">
+                    Add to cart
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <link href="{% static 'kitchen/assets/css/stayl.css' %}" rel="stylesheet">
+</div>
+
+{% endblock main %}

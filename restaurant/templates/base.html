@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+{% load kitchen_tags %}
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+
+
+    <!-- Google Fonts -->
+
+
+    <!-- Vendor CSS Files -->
+    {% include 'components/_styles.html' %}
+
+</head>
+
+<body>
+
+{% block navbar %}
+{% include 'components/_navbar.html' %}
+{% endblock navbar %}
+
+{% block poster %}
+<!-- ======= Hero Section ======= -->
+{% include 'components/_poster.html' %}
+<!-- End Hero -->
+{% endblock poster %}
+
+
+<main id="main">
+    {% block main %}
+
+    {% endblock main %}
+</main><!-- End #main -->
+
+{% block footer %}
+{% include 'components/_footer.html' %}
+{% endblock footer %}
+
+
+<!-- Vendor JS Files -->
+{% include 'components/_scripts.html' %}
+
+<!-- Template Main JS File -->
+
+
+</body>
+
+</html>

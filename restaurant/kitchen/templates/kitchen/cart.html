@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block poster %}
+
+{% endblock poster %}
+
+{% block main %}
+<div class="container booked_card">
+    <div class="row">
+
+        <br>
+
+        <div class="box-element">
+            {% for item in products %}
+            {% include 'kitchen/components/_cart_row.html' %}
+            {% endfor %}
+        </div>
+        <div class="col-lg-12">
+            <div class="box-element">
+                <div style="margin-bottom: 20px;"></div>
+                <a href="{% url 'index' %}" class="btn btn-primary">Продолжить покупки</a>
+                <a href="{% url 'clear_cart' %}" class="btn btn-danger">Очистить корзину</a>
+            </div>
+            <table class="table">
+                <tr>
+                    <th><h5>Стоимость: <strong>{{ order.get_cart_final_price }}</h5></th>
+                    <th>
+                        <a href="{% url 'checkout' %}" class="btn btn-success"
+                           style="float:right; margin:5px;">Оформить заказ</a>
+                    </th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+    main{
+        padding-top: 10rem;
+        height: 90vh
+    }
+    .booked_card{
+        position: inherit;
+    }
+    .booked_card h5{
+        color: white;
+    }
+    .booked_card .cart_row{
+        color: black;
+    }
+</style>
+
+{% endblock main %}
